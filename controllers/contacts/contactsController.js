@@ -1,4 +1,3 @@
-
 const { wrapper, errorHandler } = require("../../helpers");
 const Contact = require("../../models/contact");
 const {
@@ -9,7 +8,8 @@ const {
 //обробка запитів
 
 const handleGetAll = async (req, res, next) => {
-  const data = await Contact.find();
+  const { _id: owner } = req.user;
+  const data = await Contact.find({ owner }, "-createdAt -updatedAt");
   res.json(data);
 };
 
@@ -24,7 +24,8 @@ const handleContactById = async (req, res, next) => {
 
 const handleAddNewContact = async (req, res, next) => {
   const { name, email, phone, favorite } = req.body;
-  console.log(req.body);
+  const { _id: owner } = req.user;
+  console.log(owner);
 
   const { error } = contactSchemaJoi.validate(req.body);
 
@@ -36,7 +37,13 @@ const handleAddNewContact = async (req, res, next) => {
     const text = error.details[0].message;
     errorHandler(400, text);
   }
-  const newContact = await Contact.create({ name, email, phone, favorite });
+  const newContact = await Contact.create({
+    name,
+    email,
+    phone,
+    favorite,
+    owner,
+  });
   res.status(201).json(newContact);
 };
 

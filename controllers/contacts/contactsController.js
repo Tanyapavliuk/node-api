@@ -1,7 +1,10 @@
-const errorHandler = require("../helpers/errorHandler");
-const { schema, schemaFavorite } = require("../helpers/shemaValidation");
-const wrapper = require("../helpers/tryCatch");
-const Contact = require("../cervice/shema/contact");
+
+const { wrapper, errorHandler } = require("../../helpers");
+const Contact = require("../../models/contact");
+const {
+  contactSchemaJoi,
+  favoriteSchemaJoi,
+} = require("../../shemas/contacts");
 
 //обробка запитів
 
@@ -23,7 +26,7 @@ const handleAddNewContact = async (req, res, next) => {
   const { name, email, phone, favorite } = req.body;
   console.log(req.body);
 
-  const { error } = schema.validate(req.body);
+  const { error } = contactSchemaJoi.validate(req.body);
 
   if (error) {
     console.log(error.details[0]);
@@ -53,7 +56,7 @@ const handleUpdataContactById = async (req, res, next) => {
     errorHandler(400, "missing fields");
   }
 
-  const { error } = schema.validate(req.body);
+  const { error } = contactSchemaJoi.validate(req.body);
 
   if (error) {
     console.log(error.details[0]);
@@ -77,7 +80,7 @@ const handleUpdataFavourite = async (req, res, next) => {
     errorHandler(400, "missing field favorite");
   }
 
-  const { error } = schemaFavorite.validate(req.body);
+  const { error } = favoriteSchemaJoi.validate(req.body);
 
   if (error) {
     errorHandler(400, `${req.body.favorite} is not valid`);

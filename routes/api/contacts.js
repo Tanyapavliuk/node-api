@@ -7,23 +7,24 @@ const {
   handleDeleteContactById,
   handleUpdataContactById,
   handleUpdataFavourite,
-} = require("../../controllers/contactsController");
-const isValid = require("../../helpers/isValideObjId");
+} = require("../../controllers/contacts/contactsController");
+const { isValid } = require("../../helpers");
+const { authorization } = require("../../middlewars");
 
 // створення окремого роуту в API за допомогою виклику методу Router з модулю express
 const router = express.Router();
 
 // створення окремих шляхів та їх обробкини
-router.get("/", handleGetAll);
+router.get("/", authorization, handleGetAll);
 
-router.get("/:id", isValid, handleContactById);
+router.get("/:id", authorization, isValid, handleContactById);
 
-router.post("/", handleAddNewContact);
+router.post("/", authorization, handleAddNewContact);
 
-router.delete("/:id", isValid, handleDeleteContactById);
+router.delete("/:id", authorization, isValid, handleDeleteContactById);
 
-router.put("/:id", isValid, handleUpdataContactById);
+router.put("/:id", authorization, isValid, handleUpdataContactById);
 
-router.patch("/:id/favorite", isValid, handleUpdataFavourite);
+router.patch("/:id/favorite", authorization, isValid, handleUpdataFavourite);
 
 module.exports = router;

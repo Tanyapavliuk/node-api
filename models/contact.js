@@ -13,7 +13,7 @@ const contactSchema = new Schema(
     },
     phone: {
       type: String,
-      required: [true, "Set phome for contact"],
+      required: [true, "Set phone for contact"],
     },
     favorite: {
       type: Boolean,

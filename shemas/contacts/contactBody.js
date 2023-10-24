@@ -1,8 +1,7 @@
 //модуль для валідації joi
 const Joi = require("joi");
-
 //схема валідації
-const schema = Joi.object({
+const contactSchemaJoi = Joi.object({
   name: Joi.string().min(3).max(30).required(),
   email: Joi.string()
     .email({
@@ -14,8 +13,4 @@ const schema = Joi.object({
   favorite: Joi.bool().default(false),
 });
 
-const schemaFavorite = Joi.object({
-  favorite: Joi.bool().required(),
-});
-
-module.exports = { schema, schemaFavorite };
+module.exports = contactSchemaJoi;

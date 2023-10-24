@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const app = require("./app");
-const BD_HOST = require("./helpers/BD_path");
+const { MONGODB_URI } = process.env;
 
 mongoose
-  .connect(BD_HOST)
+  .connect(MONGODB_URI)
   .then(() => {
     app.listen(3000, () => {
       console.log("Database connection successful");

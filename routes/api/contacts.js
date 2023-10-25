@@ -7,7 +7,7 @@ const {
   handleDeleteContactById,
   handleUpdataContactById,
   handleUpdataFavourite,
-} = require("../../controllers/contacts/contactsController");
+} = require("../../controllers/contacts");
 const { isValid } = require("../../helpers");
 const { authorization } = require("../../middlewars");
 

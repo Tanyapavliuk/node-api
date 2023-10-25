@@ -2,8 +2,6 @@ const { wrapper, errorHandler } = require("../../helpers");
 const User = require("../../models/user");
 
 const logoutUser = async (req, res, next) => {
-  console.log(req.user);
-
   const { id } = req.user;
   if (!id) {
     errorHandler(404);

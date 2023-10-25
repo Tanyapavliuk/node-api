@@ -9,7 +9,14 @@ const {
 
 const handleGetAll = async (req, res, next) => {
   const { _id: owner } = req.user;
-  const data = await Contact.find({ owner }, "-createdAt -updatedAt");
+  const { page = 1, limit = 10 } = req.query;
+  console.log(req.query);
+  const skip = (page - 1) * limit;
+  // find({фільтер по власнику за ід}, "поля що не відображаються",{пагінація вбудована в moongose skip - пропуск, limit - кількість})
+  const data = await Contact.find({ owner }, "-createdAt -updatedAt", {
+    skip,
+    limit,
+  });
   res.json(data);
 };
 

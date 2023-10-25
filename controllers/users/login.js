@@ -23,9 +23,13 @@ const loginUser = async (req, res, next) => {
   const id = user._id;
   const token = jwt.sign({ id }, SECRET, { expiresIn: "2 days" });
 
-  const updateUser = await User.findByIdAndUpdate(id, {
-    token: `Bearer ${token}`,
-  });
+  const updateUser = await User.findByIdAndUpdate(
+    id,
+    {
+      token: `Bearer ${token}`,
+    },
+    { new: true }
+  );
 
   res.status(200).json({
     status: 200,

@@ -3,6 +3,7 @@
 // в середині містить асинхтонну функцію що приймає req, res, next та в середині містить try catch
 // в блоці try викликається функція контролеру та якщо виникає помилка прокидується в блок catch
 // обов'язково потрібно повернути функцію
+const errorHandler = require("./errorHandler");
 
 const templateWrapper = (controller) => {
   const func = async (req, res, next) => {
@@ -10,7 +11,7 @@ const templateWrapper = (controller) => {
     try {
       await controller(req, res, next); // виклик котролеру, що приймає функція
     } catch (error) {
-      next(error);
+      next(errorHandler(error));
     }
   };
   return func;

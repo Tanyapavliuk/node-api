@@ -37,6 +37,7 @@ const loginUser = async (req, res, next) => {
     user: {
       email: updateUser.email,
       subscription: updateUser.subscription,
+      avatarURL: updateUser.avatarURL,
     },
   });
 };

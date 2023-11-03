@@ -1,7 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors"); // обробка cors запитів
-
 require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
@@ -13,7 +12,9 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short"; // л�
 
 app.use(logger(formatsLogger));
 app.use(cors());
+
 app.use(express.json()); // обробка формату json в req.body
+app.use(express.static("public"));
 
 app.use("/api/contacts", contactsRouter); // імпорт окремого роуту
 app.use("/users", authRouter); // імпорт окремого роуту

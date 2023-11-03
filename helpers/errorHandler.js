@@ -1,4 +1,4 @@
-const messageDefault = {
+const messages = {
   400: "Bad Request",
   401: "Unauthorized",
   404: "Not Found",
@@ -6,10 +6,9 @@ const messageDefault = {
 };
 
 // функція прокидання помилки для блоку try
-function errorHandler(status, message) {
-  const error = new Error(); //створення нової помилки
+function errorHandler(status, message = messages[status]) {
+  const error = new Error(message); //створення нової помилки
   error.status = status;
-  error.message = message || messageDefault[status];
   throw error;
 }
 

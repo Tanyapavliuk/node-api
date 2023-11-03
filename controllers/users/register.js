@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const gravatar = require("gravatar");
 
 const { wrapper, errorHandler } = require("../../helpers");
 const userRegisterSchemaJoi = require("../../shemas/users/register");
@@ -13,13 +14,19 @@ const registerUser = async (req, res, next) => {
     errorHandler(409, "Email in use");
   }
 
+  const avatarURL = gravatar.url(email);
+
   const hash = await bcrypt.hash(password, 10);
 
-  const newUser = await User.create({ email, password: hash });
+  const newUser = await User.create({
+    email,
+    password: hash,
+    avatarURL,
+  });
 
   res.status(201).json({
     status: 201,
-    data: { email, password, subscription: newUser.subscription },
+    data: { email, password, subscription: newUser.subscription, avatarURL },
   });
 };
 

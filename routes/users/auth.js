@@ -9,6 +9,9 @@ const {
   currentUser,
   updateSub,
   updateAvatar,
+  sendEmail,
+  verification,
+  duplicateVerefi,
 } = require("../../controllers/users");
 const { validationUserBody, authorization } = require("../../middlewars");
 
@@ -26,6 +29,9 @@ const multerConfig = multer.diskStorage({
 const upload = multer({ storage: multerConfig });
 
 router.post("/register", validationUserBody, registerUser);
+router.post("/email", sendEmail);
+router.get("/verify/:verificationToken", verification);
+router.post("/users/verify", duplicateVerefi);
 router.post("/login", validationUserBody, loginUser);
 router.post("/logout", authorization, logoutUser);
 router.post("/current", authorization, currentUser);

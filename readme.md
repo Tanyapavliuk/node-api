@@ -1,31 +1,30 @@
-## GoIT Node.js Course Template Homework
+# Contacts Api
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+### Use MangoDB, Express, Mongosse
 
-Додайте ментора до колаборації
+> Method: get to "/api/contacts/" get all contacts;
 
-Для кожної домашньої роботи створюйте свою гілку.
+> Method: get to "/api/contacts/:id", get contact by id;
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+> Method: post to "/api/contacts/" create new contact (example body:
+> { "name": "Tanya",
+> "email": "tanya@fg.com",
+> "phone": "38000000000",
+> "favorite": true
+> })
 
-Кожна нова гілка для др повинна робитися з master
+> Method: delete to "/api/contacts/:id" delete contact by id;
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
+> Method: put to "/api/contacts/:id" update contact by id (example body: {
 
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
+    "name": "Tanya",
+    "email": "Tanya@pr.com",
+    "phone": "+380655761210"})
 
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
+> Method: patch to "/api/contacts/:id/favorite" update favorite value (example body {
 
-### Команди:
+    "favorite": false
 
-- `npm start` &mdash; старт сервера в режимі production
-- `npm run start:dev` &mdash; старт сервера в режимі розробки (development)
-- `npm run lint` &mdash; запустити виконання перевірки коду з eslint, необхідно виконувати перед кожним PR та виправляти всі помилки лінтера
-- `npm lint:fix` &mdash; та ж перевірка лінтера, але з автоматичними виправленнями простих помилок
+})
+
+![My octocat](./octocat.png)

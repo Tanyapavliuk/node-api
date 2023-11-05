@@ -8,19 +8,16 @@ const User = require("../../models/user");
 const { SECRET } = process.env;
 
 const loginUser = async (req, res, next) => {
-  const { email, password, verify } = req.body;
+  const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-
   if (!user) {
     errorHandler(404);
   }
+
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
     errorHandler(401, "Email or password is wrong");
-  }
-  if (!verify) {
-    errorHandler(401, "Pleas, verefy your email");
   }
 
   const id = user._id;
@@ -30,7 +27,6 @@ const loginUser = async (req, res, next) => {
     id,
     {
       token: `Bearer ${token}`,
-      verificationToken: "",
     },
     { new: true }
   );

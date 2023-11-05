@@ -1,7 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors"); // обробка cors запитів
-const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
@@ -16,7 +15,6 @@ app.use(cors());
 
 app.use(express.json()); // обробка формату json в req.body
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: false })); //Використання bodyParser для розкодування форм в кодованому форматі
 
 app.use("/api/contacts", contactsRouter); // імпорт окремого роуту
 app.use("/users", authRouter); // імпорт окремого роуту
